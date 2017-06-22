@@ -57,7 +57,7 @@
 
     <div class="col s12 l4 imageContainer1" id="imageContainer" >
       <div class="flow-text mision">
-        <img src="http://i.imgur.com/VHqFfYe.png" class="invert">
+        <img src="../imgs/cocina.png" class="invert">
         <h3> Calidad de su Menú </h3>
         Un menú con opciones
         clave para satisfacer el paladar de nuestros clientes.
@@ -65,14 +65,14 @@
     </div>
     <div class="col s12 m4 l4 imageContainer2" id="imageContainer" >
       <div class="flow-text mision">
-        <img src="http://i.imgur.com/VHqFfYe.png" class="invert">
+        <img src="../imgs/speaker.png" class="invert">
         <h3> Un ambiente agradable </h3>
         El punto de entretenimiento favorito de nuestros clientes.
       </div>
     </div>
     <div class="col s12 m4 l4 imageContainer3" id="imageContainer" >
       <div class="flow-text mision">
-        <img src="http://i.imgur.com/HobZzK1.png" class="invert">
+        <img src="../imgs/employee.png" class="invert">
         <h3> Calidad de servicio</h3>
           Con el fin de lograr la preferencia de nuestros usuarios.
       </div>
@@ -172,15 +172,15 @@ export default {
       color: #000000;
   }
   div .imageContainer1{
-    background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url("http://i.imgur.com/x3WW31Y.jpg");
+    background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('../../imgs/grill.jpg');
     background-size: cover;
   }
   div .imageContainer2{
-    background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url("http://i.imgur.com/HqDP7P8.jpg");
+    background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('../../imgs/table_setting.jpg');
     background-size: cover;
   }
   div .imageContainer3{
-    background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url("http://i.imgur.com/iJV6vsj.jpg");
+    background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('https://www.pexels.com/photo/hamburger-meal-on-tray-115039/');
     background-size: cover;
   }
   h3 .mision{
