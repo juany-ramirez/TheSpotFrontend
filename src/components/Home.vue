@@ -172,15 +172,15 @@ export default {
       color: #000000;
   }
   div .imageContainer1{
-    background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('http://imgur.com/x3WW31Y');
+    background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('http://i.imgur.com/x3WW31Y.jpg');
     background-size: cover;
   }
   div .imageContainer2{
-    background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('http://imgur.com/iJV6vsj');
+    background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('http://i.imgur.com/HqDP7P8.jpg');
     background-size: cover;
   }
   div .imageContainer3{
-    background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('http://imgur.com/x3WW31Y');
+    background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('http://i.imgur.com/iJV6vsj.jpg');
     background-size: cover;
   }
   h3 .mision{
