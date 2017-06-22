@@ -15,14 +15,14 @@
               <div class='row'>
                 <div class='input-field col s12'>
                   <i class="material-icons prefix">account_circle</i>
-                  <input class='validate' type='text' id='nombre' />
+                  <input v-on:input="usuario.nombre= $event.target.vue" class='validate' type='text' id='nombre' />
                   <label for='nombre'>Nombre Completo</label>
                 </div>
               </div>
               <div class='row'>
                 <div class='input-field col s12'>
                   <i class="material-icons prefix">verified_user</i>
-                  <input class='validate' type='text' id='usuario' />
+                  <input v-on:input="usuario.usuario= $event.target.vue" class='validate' type='text' id='usuario' />
                   <label for='usuario'>Usuario</label>
                 </div>
               </div>
@@ -30,7 +30,7 @@
               <div class='row'>
                 <div class='input-field col s12'>
                   <i class="material-icons prefix">phone</i>
-                  <input class='validate' type='text'  id='telefono' />
+                  <input v-on:input="usuario.telefono= $event.target.vue" class='validate' type='text'  id='telefono' />
                   <label for='telefono'>Celular</label>
                 </div>
               </div>
@@ -44,7 +44,7 @@
               <div class='row'>
                 <div class='input-field col s12'>
                   <i class="material-icons prefix">vpn_key</i>
-                  <input class='validate' v-model="pass2" type='password' id='password2' />
+                  <input v-on:input="usuario.contrasena= $event.target.vue" class='validate' v-model="pass2" type='password' id='password2' />
                   <label for='password2'> Reescribir contraseña</label>
                 </div>
               </div>
@@ -117,6 +117,7 @@ export default {
   name: 'register',
   data(){
     return{
+      usuario:{},
       pass1: '',
       pass2: '',
       loading: false
@@ -127,6 +128,16 @@ export default {
       this.loading=true;
       if(this.pass1 === this.pass2){
         this.loading=false;
+          this.usuario.idPersonal= 'N/A';
+          this.usuario.idOrdenes ='N/A';
+          this.usuario.scope =['cliente'];
+          this.$http.get('https://vast-escarpment-20960.herokuapp.com/usuarios/register',this.usuario).then((response)=>{
+  					if (response.bodu.success) {
+  					  sweetAlert("creado con exito!");
+  					}else{
+              sweetAlert("ERROR");
+            }
+  				});
       }else{
         this.loading=false;
         sweetAlert("Oops...", "La contraseña no es la misma", "error");
