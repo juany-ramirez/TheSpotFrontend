@@ -142,6 +142,9 @@ export default {
   font-family: 'Source Sans Pro', sans-serif;
 
 }
+.row{
+  color: black;
+}
 .registro:hover{
   color: #06152F !important;
   text-decoration: underline;

@@ -12,9 +12,9 @@
               <p>Ingrese Codigo QR de la mesa</p>
               <span>img</span>
               <label class="custom-file-upload btn-floating -red">
-                  <i class="material-icons right">camera_alt</i>
-                  <input type="file" accept="image/*" capture="camera"/>
-                  <img src="" alt="">
+                <i class="material-icons right">camera_alt</i>
+                <input type="file" accept="image/*" capture="camera"/>
+                <img src="" alt="">
               </label>
               <div class="row">
 
@@ -212,7 +212,7 @@ export default {
     color: #F4F0EA;
   }
   .collection-headerCliente{
-    background-color: #FF0B00 !important; 
+    background-color: #FF0B00 !important;
   }
   .collapsible-header{
     font-family: 'Lobster Two', cursive;
