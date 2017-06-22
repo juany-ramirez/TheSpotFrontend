@@ -42,6 +42,7 @@
 </template>
 
 <script>
+import baseUrl from '../../config'
 export default {
   name: 'admin',
   data(){
