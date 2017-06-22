@@ -131,7 +131,7 @@ export default {
           this.usuario.idPersonal= 'N/A';
           this.usuario.idOrdenes ='N/A';
           this.usuario.scope =['cliente'];
-          this.$http.post('https://vast-escarpment-20960.herokuapp.com/register',this.usuario).then((response)=>{
+          this.$http.post('https://vast-escarpment-20960.herokuapp.com/register',this.usuario, { headers: { 'Access-Control-Allow-Origin': true }}).then((response)=>{
   					if (response.body.success) {
   					  sweetAlert("creado con exito!");
   					}else{
