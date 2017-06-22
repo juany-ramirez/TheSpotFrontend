@@ -30,7 +30,7 @@
               <br>
               <center>
                 <div class='row'>
-                  <a class="col s12 btn-large waves-effect waves-light btn -blue" >Login</a>
+                  <a v-on:click="login()" class="col s12 btn-large waves-effect waves-light btn -blue" >Login</a>
                 </div>
               </center>
             </form>
@@ -49,7 +49,7 @@ export default {
   name : 'login',
   data() {
     return {
-      user: {
+      usuario: {
         usuario: '',
         contrasena:''
       },
@@ -61,15 +61,15 @@ export default {
   methods : {
     verify(){
       var message='';
-      if(this.user.usuario.length==0){
+      if(this.usuario.usuario.length==0){
         this.valid=false;
         message+='-Usuario no puede ser vacio\n';
       }
-      if(this.user.contrasena.length==0){
+      if(this.usuario.contrasena.length==0){
         this.valid=false;
         message+='-Contraseña no puede ser vacia\n';
       }
-      if(/^[a-zA-z0-9]+$/.test(this.user.usuario) && /^[a-zA-z0-9]+$/.test(this.user.contrasena)){
+      if(/^[a-zA-z0-9]+$/.test(this.usuario.usuario) && /^[a-zA-z0-9]+$/.test(this.usuario.contrasena)){
         this.valid=true;
       }else{
         message+='-Usuario y contraseña solo deben tener letras y numeros';
@@ -77,7 +77,7 @@ export default {
       }
       if(this.valid){
         if(this.valid){
-          this.$http.post('https://vast-escarpment-20960.herokuapp.com/login',this.user).then((response)=>{
+          this.$http.post('https://vast-escarpment-20960.herokuapp.com/login',this.usuario).then((response)=>{
             if(response.body.success){
               swal({
                 title: 'Bienvenido(a)!',
@@ -85,7 +85,7 @@ export default {
               });
               localStorage.setItem('usuario',JSON.stringify({usuario: response.body.usuario, scope: response.body.scope}));
               alert(JSON.parse(localStorage.getItem('usuario')).usuario);
-              this.$router.push('/');
+              this.$router.push('/menu');
             }else{
               if(response.body.tipo==='length' || response.body.tipo==='null'){
                 message+='-Usuario no encontrado. Verifique sus credenciales';
@@ -110,9 +110,9 @@ export default {
       }
     },
     login(){
-      this.$http.post('https://vast-escarpment-20960.herokuapp.com/login', this.user).then((response)=>{
-        this.$router.push('/home');
-        swal("Bienvenido!", response.body.username.toUpperCase() ,"success");
+      this.$http.post('https://vast-escarpment-20960.herokuapp.com/login', this.usuario).then((response)=>{
+        this.$router.push('/menu');
+        swal("Bienvenido!", response.body.usuario.toUpperCase() ,"success");
       });
     },
     register(){
@@ -120,7 +120,7 @@ export default {
       this.usuario.scope = ['cliente'];
       this.$http.post('https://vast-escarpment-20960.herokuapp.com/register', this.usuario).then((response)=>{
         this.$router.push('/home');
-        swal("Se ha creado tu usuario", response.body.username, "success");
+        swal("Se ha creado tu usuario", response.body.usuario, "success");
       });
     }
   },
