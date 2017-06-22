@@ -145,6 +145,7 @@
 </template>
 
 <script>
+import baseUrl from '../../config'
 export default {
   name: 'producto',
   data(){
@@ -156,13 +157,13 @@ export default {
   },
   methods: {
       getProducto(){
-				this.$http.get('http://localhost:8000/productos').then((response)=>{
+				this.$http.get(`${baseUrl.uri}/productos`).then((response)=>{
 					this.productos=response.body;
 				});
 			},
 			createProducto(){
 				this.loading=true;
-				this.$http.post('http://localhost:8000/productos/create',this.producto)
+				this.$http.post(`${baseUrl.uri}/productos/create`,this.producto)
 				.then((response)=>{
 					this.loading=false;
 					if(response.body.success){
@@ -175,7 +176,7 @@ export default {
 			},
       modifyProducto(id){
 				this.loading=true;
-				this.$http.put('http://localhost:8000/productos/update/'+id,this.producto)
+				this.$http.put(`${baseUrl.uri}/productos/update/`+id,this.producto)
 				.then((response)=>{
 					this.loading=false;
 					if(response.body.success){
@@ -188,7 +189,7 @@ export default {
 			},
       deleteProducto(id){
 					this.loading=true;
-					this.$http.delete('http://localhost:8000/productos/delete/'+id)
+					this.$http.delete(`${baseUrl.uri}/productos/delete/`+id)
 						.then((response)=>{
 						this.loading=false;
 						if(response.body.success){

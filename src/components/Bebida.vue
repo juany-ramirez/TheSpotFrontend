@@ -104,6 +104,7 @@
 </template>
 
 <script>
+import baseUrl from '../../config'
 export default {
   name: 'bebida',
   data(){
@@ -124,7 +125,7 @@ export default {
       if(val!='N/A'){
         this.nombreProv = '';
       }else {
-        this.$http.get('http://localhost:8000/proveedor/searchbyid/{_id}').then((response)=>{
+        this.$http.get(`${baseUrl.uri}/proveedor/searchbyid/{_id}`).then((response)=>{
 					this.nombreProv = response.body.proveedor.nombre;
 				});
       }
@@ -132,7 +133,7 @@ export default {
   },
   methods: {
       getBebida(){
-				this.$http.get('http://localhost:8000/bebidas').then((response)=>{
+				this.$http.get(`${baseUrl.uri}/bebidas`).then((response)=>{
 					this.bebidas=response.body;
 				});
 			},
@@ -145,7 +146,7 @@ export default {
 			createBebida(){
 				this.loading=true;
         this.bebida.idProveedor = this.idProv;
-				this.$http.post('http://localhost:8000/bebidas/create',this.bebida)
+				this.$http.post(`${baseUrl.uri}/bebidas/create`,this.bebida)
 				.then((response)=>{
 					this.loading=false;
 					if(response.body.success){
@@ -182,7 +183,7 @@ export default {
         if(this.idModificar!=''){
           Materialize.updateTextFields();
           this.bebida.idProveedor = this.idProv;
-          this.$http.put('http://localhost:8000/bebidas/update/'+this.idModificar,this.bebida)
+          this.$http.put(`${baseUrl.uri}/bebidas/update/`+this.idModificar,this.bebida)
   				.then((response)=>{
   					if(response.body.success){
               this.getBebida();
@@ -198,7 +199,7 @@ export default {
       },
       deleteBebida(idBebida){
           this.loading=true;
-          this.$http.delete('http://localhost:8000/bebidas/delete/'+idBebida)
+          this.$http.delete(`${baseUrl.uri}/bebidas/delete/`+idBebida)
             .then((response)=>{
             this.loading=false;
             if(response.body.success){
@@ -210,7 +211,7 @@ export default {
           });
 			},
       getProveedores(){
-        this.$http.get('http://localhost:8000/proveedores').then((response)=>{
+        this.$http.get(`${baseUrl.uri}/proveedores`).then((response)=>{
 					this.proveedores=response.body;
 				});
       }
