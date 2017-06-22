@@ -132,7 +132,7 @@ export default {
           this.usuario.idPersonal= 'N/A';
           this.usuario.idOrdenes ='N/A';
           this.usuario.scope =['cliente'];
-          this.$http.post(`${baseUrl.uri}/register`,this.usuario).then((response)=>{
+          this.$http.post(`${baseUrl.uri}/usuarios/create`,this.usuario).then((response)=>{
   					if (response.body.success) {
   					  sweetAlert("creado con exito!");
   					}else{

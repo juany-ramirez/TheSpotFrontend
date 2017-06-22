@@ -1,4 +1,5 @@
 <template>
+  
   <div id="root">
     <h2>Producto</h2>
     <table class="table centered">
@@ -15,11 +16,11 @@
 			</thead>
 			<tbody>
 				<tr v-for="producto in productos">
-					<td contenteditable v-model="producto.nombre">{{producto.nombre}}</td>
-					<td contenteditable v-model="producto.descripcion">{{producto.descripcion}}</td>
-					<td contenteditable v-model="producto.precio">{{producto.precio}}</td>
-          <td contenteditable v-model="producto.idBebida">{{producto.idBebida}}</td>
-					<td contenteditable v-model="producto.idProducto_Elaborado">{{producto.idProducto_Elaborado}}</td>
+					<td>{{producto.nombre}}</td>
+					<td>{{producto.descripcion}}</td>
+					<td>{{producto.precio}}</td>
+          <td>{{producto.idBebida}}</td>
+					<td>{{producto.idProducto_Elaborado}}</td>
 					<td>
 						<a v-on:click="deleteProducto(producto._id)" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">delete</i></a>
 					</td>
