@@ -41,22 +41,22 @@
     </ul>
     <div class="row">
         <div class="input-field col s12">
-          <input v-on:input="bebida.nombre = $event.target.value" type="text" v-model="bebida.nombre" :disabled="loading"  id="Nombre">
+          <input v-on:input="bebida.nombre" type="text" v-model="bebida.nombre" :disabled="loading"  id="Nombre">
           <label for="Nombre">Nombre</label>
         </div>
         <div class="input-field col s6">
-          <input v-on:input="bebida.tipo = $event.target.value" v-model="bebida.tipo" :disabled="loading"  id="Tipo" type="text" class="validate">
+          <input v-on:input="bebida.tipo" v-model="bebida.tipo" :disabled="loading"  id="Tipo" type="text" class="validate">
           <label for="Tipo">Tipo</label>
         </div>
         <div class="input-field col s6">
-          <input v-on:input="bebida.inventario = $event.target.value" type="number" v-model="bebida.inventario" :disabled="loading"  id="Inventario">
+          <input v-on:input="bebida.inventario" type="number" v-model="bebida.inventario" :disabled="loading"  id="Inventario">
           <label for="Inventario">Inventario</label>
         </div>
         <div class="row">
           <form class="col s12">
             <div class="row">
               <div class="input-field col s12">
-                <textarea v-on:input="bebida.descripcion = $event.target.value" v-model="bebida.descripcion" :disabled="loading"  id="Descripcion" type="text"  class="materialize-textarea"></textarea>
+                <textarea v-on:input="bebida.descripcion" v-model="bebida.descripcion" :disabled="loading"  id="Descripcion" type="text"  class="materialize-textarea"></textarea>
                 <label for="Descripcion">Descripción</label>
               </div>
             </div>
@@ -74,15 +74,13 @@
               </li>
             </ul>
           </div>
-          <div id="importance"class="input-field col s6 center">
+          <div class="input-field col s6 importance ">
             <br>
-              <label  id="idProveedor">
-                <h4>
-                  <a v-on:click="borrarProveedor()" class="waves-effect waves-light">
-                    <i class="material-icons">delete</i>
-                  </a> {{idProv}}  {{nombreProv}}
-                </h4>
-              </label>
+              <div  id="idProveedor">
+                <a v-on:click="borrarProveedor()" class="waves-effect waves-light">
+                  <i class="material-icons">delete</i>
+                </a> {{idProv}}  {{nombreProv}}
+              </div>
 
           </div>
         </div>
@@ -119,17 +117,6 @@ export default {
       proveedor:{},
       proveedores: []
     }
-  },
-  watch: {
-    idProv: function (val) {
-      if(val!='N/A'){
-        this.nombreProv = '';
-      }else {
-        this.$http.get(`${baseUrl.uri}/proveedor/searchbyid/{_id}`).then((response)=>{
-					this.nombreProv = response.body.proveedor.nombre;
-				});
-      }
-    },
   },
   methods: {
       getBebida(){
@@ -224,17 +211,31 @@ export default {
       $('ul.tabs').tabs();
       $('select').material_select();
       $('.tooltipped').tooltip({delay: 50});
+  },
+  watch: {
+    idProv: function (val) {
+      if(val!='N/A'){
+        this.nombreProv = '';
+      }else {
+        this.$http.get(`${baseUrl.uri}/proveedor/searchbyid/{_id}`).then((response)=>{
+          console.log(exito);
+					this.nombreProv = response.body.proveedor.nombre;
+				});
+      }
+      console.log('por lo menos');
+    }
   }
 }
 </script>
 
 <style scoped>
-  #importance{
-    color: black !important;
+  .importance{
+    color: #06152F !important;
     opacity: 0.7;
     text-align: center;
     font-family: 'Roboto', sans-serif !important;
-    font-weight: lighter;
+    font-weight: lighter !important;
+    font-size: 20px !important;
   }
   .collection-item{
     color: black;
@@ -319,8 +320,6 @@ export default {
     background-color: red;
   }
   h4{
-    text-align: center;
-    color: black !important;
 
   }
   #root{

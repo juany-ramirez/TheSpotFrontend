@@ -22,6 +22,11 @@
            Producto
         </div>
       </router-link>
+      <router-link to="/mesa">
+        <div class="col s3 m3 l1 contain waves-effect waves-light z-depth-5 -red">
+           Comida/ Bebida Elaborada
+        </div>
+      </router-link>
       <router-link to="/promocion">
         <div class="col s3 m3 l1 contain waves-effect waves-light z-depth-5 -red">
            Promocion
@@ -42,6 +47,7 @@
 </template>
 
 <script>
+import baseUrl from '../../config'
 export default {
   name: 'admin',
   data(){

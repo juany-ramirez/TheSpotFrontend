@@ -180,7 +180,7 @@ export default {
     background-size: cover;
   }
   div .imageContainer3{
-    background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('https://www.pexels.com/photo/hamburger-meal-on-tray-115039/');
+    background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('../../imgs/burger.jpeg');
     background-size: cover;
   }
   h3 .mision{

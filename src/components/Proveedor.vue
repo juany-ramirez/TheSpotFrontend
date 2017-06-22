@@ -144,13 +144,13 @@ export default {
   },
   methods: {
       getProveedor(){
-				this.$http.get('http://localhost:8000/proveedores').then((response)=>{
+				this.$http.get(`${baseUrl.uri}/proveedores`).then((response)=>{
 					this.proveedores=response.body;
 				});
 			},
 			createProveedor(){
 				this.loading=true;
-				this.$http.post('http://localhost:8000/proveedor/create',this.proveedor)
+				this.$http.post(`${baseUrl.uri}/proveedor/create`,this.proveedor)
 				.then((response)=>{
 					this.loading=false;
 					if(response.body.success){
@@ -163,7 +163,7 @@ export default {
 			},
       deleteProveedor(id){
 					this.loading=true;
-					this.$http.delete('http://localhost:8000/proveedor/delete/'+id)
+					this.$http.delete(`${baseUrl.uri}/proveedor/delete/`+id)
 						.then((response)=>{
 						this.loading=false;
 						if(response.body.success){
