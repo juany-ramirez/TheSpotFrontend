@@ -1,84 +1,155 @@
-<template>
-  <div class="container">
-    <div class="section"></div>
-    <main>
-      <center>
+    <template>
+      <div class="container">
         <div class="section"></div>
-        <div class="container">
+        <main>
+          <center>
+            <div class="section"></div>
+            <div class="container">
 
-          <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
-            <form class="col s12" method="post">
-              <div class='row'>
-                <div class='col s12'>
-                </div>
+              <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
+                <form class="col s12" method="post">
+                  <div class='row'>
+                    <div class='col s12'>
+                    </div>
+                  </div>
+                  <div class='row'>
+                    <div class='input-field col s12'>
+                      <input class='validate' type='email' name='email' id='email' />
+                      <label for='email'>Usuario</label>
+                    </div>
+                  </div>
+                  <div class='row'>
+                    <div class='input-field col s12'>
+                      <input class='validate' type='password' name='password' id='password' />
+                      <label for='password'>Contraseña</label>
+                    </div>
+                    <label style='float: right;'>
+                      <a class='registro'><router-link to="/registrar"><b>Crear cuenta nueva</b></router-link></a>
+                    </label>
+                  </div>
+                  <br>
+                  <center>
+                    <div class='row'>
+                      <a class="col s12 btn-large waves-effect waves-light btn -blue" >Login</a>
+                    </div>
+                  </center>
+                </form>
               </div>
-              <div class='row'>
-                <div class='input-field col s12'>
-                  <input class='validate' type='email' name='email' id='email' />
-                  <label for='email'>Usuario</label>
-                </div>
-              </div>
-              <div class='row'>
-                <div class='input-field col s12'>
-                  <input class='validate' type='password' name='password' id='password' />
-                  <label for='password'>Contraseña</label>
-                </div>
-                <label style='float: right;'>
-                  <a class='registro'><router-link to="/registrar"><b>Crear cuenta nueva</b></router-link></a>
-  							</label>
-              </div>
-              <br>
-              <center>
-                <div class='row'>
-                  <a class="col s12 btn-large waves-effect waves-light btn -blue" >Login</a>
-                </div>
-              </center>
-            </form>
-          </div>
-        </div>
-      </center>
+            </div>
+          </center>
 
-      <div class="section"></div>
-      <div class="section"></div>
-    </main>
-  </div>
-</template>
+          <div class="section"></div>
+          <div class="section"></div>
+        </main>
+      </div>
+    </template>
 
-<script>
-export default {
-  name: 'login'
-}
-</script>
+    <script>
+    export default {
+      name : 'login',
+      data() {
+        return {
+          user: {
+            usuario: '',
+            contrasena:''
+          },
+          valid: true
+        }
+      },
+      mounted() {
+      },
+      methods : {
+        verify(){
+          var message='';
+          if(this.user.usuario.length==0){
+            this.valid=false;
+            message+='-Usuario no puede ser vacio\n';
+          }
+          if(this.user.contrasena.length==0){
+            this.valid=false;
+            message+='-Contraseña no puede ser vacia\n';
+          }
+          if(/^[a-zA-z0-9]+$/.test(this.user.usuario) && /^[a-zA-z0-9]+$/.test(this.user.contrasena)){
+            this.valid=true;
+          }else{
+            message+='-Usuario y contraseña solo deben tener letras y numeros';
+            this.valid=false;
+          }
+          if(this.valid){
+            if(this.valid){
+              this.$http.post('https://vast-escarpment-20960.herokuapp.com/login',this.user).then((response)=>{
+                if(response.body.success){
+                  swal({
+                    title: 'Bienvenido(a)!',
+                    type: 'success'
+                  });
+                  localStorage.setItem('usuario',JSON.stringify({usuario: response.body.usuario, scope: response.body.scope}));
+                  alert(JSON.parse(localStorage.getItem('usuario')).usuario);
+                  this.$router.push('/');
+                }else{
+                  if(response.body.tipo==='length' || response.body.tipo==='null'){
+                    message+='-Usuario no encontrado. Verifique sus credenciales';
+                  }else if(response.body.tipo==='err'){
+                    message+='-Ocurrio un error con la BD. Verifique su coneccion a internet e intente de nuevo';
+                  }
+                  swal({
+                    title: 'Login falló!',
+                    text: 'Razones:\n'+message,
+                    type: 'error'
+                  });
+                }
+              });
+            }
+          }else{
+            swal({
+              title: 'Login falló!',
+              text: 'Razones:\n'+message,
+              type: 'error'
+            });
+            this.valid=true;
+          }
+        }
+      },
+      beforeMount(){
+        if(JSON.parse(localStorage.getItem('usuario'))!=null){
+          localStorage.removeItem('usuario');
+          this.$http.put('https://vast-escarpment-20960.herokuapp.com/logout').then((response)=>{
+            alert('Cookie borrada!');
+          });
+        }
+      }
+    }
+    </script>
 
-<style scoped>
-.registro{
-  font-size: 15px;
-  font-family: 'Source Sans Pro', sans-serif;
+    <style scoped>
+    .registro{
+      font-size: 15px;
+      font-family: 'Source Sans Pro', sans-serif;
 
-}
-.registro:hover{
-  color: #06152F !important;
-  text-decoration: underline;
-}
-.-white{
-  background-color: #F4F0EA;
-  color: black;
-}
-.-lightblue{
-  background-color: #5994AA;
-  color: #fff;
-}
-.-blue{
-  background-color: #06152F;
-  color: #fff;
-}
-.-red{
-  background-color: #FF0B00;
-  color: #fff;
-}
-.-black{
-  background-color: #262626;
-  color: #fff;
-}
+    }
+    .registro:hover{
+      color: #06152F !important;
+      text-decoration: underline;
+    }
+    .-white{
+      background-color: #F4F0EA;
+      color: black;
+    }
+    .-lightblue{
+      background-color: #5994AA;
+      color: #fff;
+    }
+    .-blue{
+      background-color: #06152F;
+      color: #fff;
+    }
+    .-red{
+      background-color: #FF0B00;
+      color: #fff;
+    }
+    .-black{
+      background-color: #262626;
+      color: #fff;
+    }
 
-</style>
+    </style>
