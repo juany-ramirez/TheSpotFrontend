@@ -235,8 +235,7 @@ export default {
     text-align: center;
     font-family: 'Roboto', sans-serif !important;
     font-weight: lighter !important;
-    font-size: 15px !important;
-    background-color: #06152F;
+    font-size: 20px !important;
   }
   .collection-item{
     color: black;
