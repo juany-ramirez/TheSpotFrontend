@@ -77,7 +77,7 @@ export default {
       }
       if(this.valid){
         if(this.valid){
-          this.$http.post('https://vast-escarpment-20960.herokuapp.com/login',this.usuario).then((response)=>{
+          this.$http.post('https://vast-escarpment-20960.herokuapp.com/login',this.usuario, { headers: { 'Access-Control-Allow-Origin': true }}).then((response)=>{
             if(response.body.success){
               swal({
                 title: 'Bienvenido(a)!',
@@ -127,7 +127,7 @@ export default {
   beforeMount(){
     if(JSON.parse(localStorage.getItem('usuario'))!=null){
       localStorage.removeItem('usuario');
-      this.$http.put('https://vast-escarpment-20960.herokuapp.com/logout').then((response)=>{
+      this.$http.put('https://vast-escarpment-20960.herokuapp.com/logout', { headers: { 'Access-Control-Allow-Origin': true }}).then((response)=>{
         alert('Cookie borrada!');
       });
     }
