@@ -111,7 +111,7 @@ export default {
     },
     login(){
       this.$http.post('https://vast-escarpment-20960.herokuapp.com/login', this.usuario).then((response)=>{
-        this.$router.push('/menu');
+        this.$router.push('/');
         swal("Bienvenido!", response.body.usuario.toUpperCase() ,"success");
       });
     },
