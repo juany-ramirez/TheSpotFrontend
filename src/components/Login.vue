@@ -45,6 +45,7 @@
 </template>
 
 <script>
+import baseUrl from '../../config'
 export default {
   name : 'login',
   data() {
@@ -77,7 +78,7 @@ export default {
       }
       if(this.valid){
         if(this.valid){
-          this.$http.post('https://vast-escarpment-20960.herokuapp.com/login',this.usuario).then((response)=>{
+          this.$http.post(`${baseUrl.uri}/login`,this.usuario).then((response)=>{
             if(response.body.success){
               swal({
                 title: 'Bienvenido(a)!',
@@ -110,7 +111,7 @@ export default {
       }
     },
     login(){
-      this.$http.post('https://vast-escarpment-20960.herokuapp.com/login', this.usuario).then((response)=>{
+      this.$http.post(`${baseUrl.uri}/login`, this.usuario).then((response)=>{
         this.$router.push('/');
         swal("Bienvenido!", response.body.usuario.toUpperCase() ,"success");
       });
@@ -118,7 +119,7 @@ export default {
     register(){
       console.log("ddddd");
       this.usuario.scope = ['cliente'];
-      this.$http.post('https://vast-escarpment-20960.herokuapp.com/register', this.usuario).then((response)=>{
+      this.$http.post(`${baseUrl.uri}/register`, this.usuario).then((response)=>{
         this.$router.push('/home');
         swal("Se ha creado tu usuario", response.body.usuario, "success");
       });
@@ -127,7 +128,7 @@ export default {
   beforeMount(){
     if(JSON.parse(localStorage.getItem('usuario'))!=null){
       localStorage.removeItem('usuario');
-      this.$http.put('https://vast-escarpment-20960.herokuapp.com/logout').then((response)=>{
+      this.$http.put(`${baseUrl.uri}/logout`).then((response)=>{
         alert('Cookie borrada!');
       });
     }
